@@ -1,10 +1,11 @@
-# app_surat
-App Surat Keluar 
+# APP ERP
+App ERP CV.AMORGROUP
 Dibuat dengan : 
 <ul>
 <li>Codeigniter</li>
 <li>Bootstrap Admin LTE</li>
 <li>Javascript</li>
+ <li>Aplikasi Corporate Boluamor.com</li>
 </ul>
  
 Cara menggunakan : 
@@ -13,7 +14,6 @@ Cara menggunakan :
 <li>Ganti settingan database, dan sesuaikan dengan settingan punya kalian</li>
 </ul>
 
-Link Demo
-<br/>
-http://demo.surdaysoft.com/surat
+
+
 
