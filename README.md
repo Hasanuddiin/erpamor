@@ -1,5 +1,4 @@
-# app_surat
-App Surat Keluar 
+# AppERP CV.Amor Group 
 Dibuat dengan : 
 <ul>
 <li>Codeigniter</li>
@@ -15,5 +14,4 @@ Cara menggunakan :
 
 Link Demo
 <br/>
-http://demo.surdaysoft.com/surat
 

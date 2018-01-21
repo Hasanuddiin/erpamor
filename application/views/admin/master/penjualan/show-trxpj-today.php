@@ -22,8 +22,17 @@
                 <a href="<?php echo base_url(); ?>admin/showreporttoday" class="btn btn-sm btn-warning btn-flat"><i class="fa fa-search"></i> &nbsp;Lihat Kategory Produk</a>  
                   <a href="<?php echo base_url(); ?>admin/showreporttoday" class="btn btn-sm btn-success btn-flat"><i class="fa fa-print"></i> &nbsp; Cetak</a>  
 
-                    <label for="exampleInputEmail1">Cari berdasarkan tanggal &nbsp; : </label>
-                    <input type="text" align="center" class="form" name="haritanggal" id="tgllahir" width="30" height="20" >
+                    
+                    <form name="form1" action="" method="post" enctype="multipart/form-data">
+                        <div class="form-group" style="margin-left:10px;">
+                           <label>Cari Berdasarkan Tanggal</label>
+                           <div class="date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                           <input class="form-control datepicker"  id="tgllahir" data-date-format="yyyy-mm-dd" type="text" name="tanggal" style="width:150px" >
+                           </div>
+                           
+                        </div>
+    
+                     </form>
                
                   <div class="box-tools">
                   	<!--

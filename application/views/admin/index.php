@@ -275,7 +275,7 @@
                   <li><a href="<?php echo base_url(); ?>returpenjualan/addtrt"><i class="fa fa-angle-double-right"></i> Tambah Retur</a></li>
                   <li><a href="<?php echo base_url(); ?>returpenjualan/showtrxrtpen"><i class="fa fa-angle-double-right"></i>Daftar Retur</a></li>
                 </ul>
-                <li><a href="http://localhost/pos-amor"><i class="fa fa-fw fa-desktop"></i> POS Kasir</a></li>
+                <li><a href="https://103.28.148.154/pos-amor"><i class="fa fa-fw fa-desktop"></i> POS Kasir</a></li>
               </li>
                 </ul>
 

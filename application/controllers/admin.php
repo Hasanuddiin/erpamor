@@ -289,7 +289,8 @@ class Admin extends CI_Controller {
 	
 	function edit_user($id){
 		$this->cek_aktif();
-		$a['editdata']	= $this->db->get_where('as_users',array('userID'=>$id))->result_object();		
+		//$a['editdata']	= $this->db->get_where('as_pegawai',array('nip'=>$id))->result_object();	
+		$a['editdata']	= $this->model_user->tampil_data_user($id)->result_object();		
 		$a['page']	= "user/edit_user";
 		$a['title'] = "Edit User";
 		$this->load->view('admin/index', $a);
@@ -984,6 +985,7 @@ class Admin extends CI_Controller {
 	/* Produk */
 	function produk() {
 		$this->cek_aktif();
+		$level=$this->session->userdata('admin_level');
 		$identity=$this->session->userdata('identityID');
 		$a['dataamor'] = $this->model_master->tampil_produk_amor($identity)->result_object();
 		$a['data'] = $this->model_master->tampil_produk_mitra($identity)->result_object();
@@ -1025,8 +1027,7 @@ class Admin extends CI_Controller {
 		$note = $this->input->post('note');
 		$diskonstatus = $this->input->post('diskonstatus');
 		$diskondatestart = $this->input->post('diskondatestart');
-		$jamMulai = $this->input->post('jamMulai');
-		$jamAkhir = $this->input->post('jamAkhir');
+		
 		$diskondatestop = $this->input->post('diskondatestop');
 		$statuspromo = $this->input->post('statuspromo');
 		$promomaxbuy = $this->input->post('promomaxbuy');
@@ -1067,8 +1068,6 @@ class Admin extends CI_Controller {
 			
 			$objectdisc = array(
 			'discount_start' => $diskondatestart,
-			'jam_start' => $jamMulai,
-			'jam_end' => $jamAkhir,
 			'discount_end' => $diskondatestop,
 			'discount_status' => $diskonstatus
 			);
@@ -1123,6 +1122,20 @@ class Admin extends CI_Controller {
 		$a['produksiID'] = $produksiID;
 		$a['page']	= "master/produk/tambah_produk";
 		$a['title'] = "Tambah Produk";
+		$a['suplier']	= $this->model_master->tampil_mitra()->result_object();	
+		$a['kategori']	= $this->model_master->tampil_kategori_prod()->result_object();
+		$a['satuan']	= $this->model_master->tampil_satuan()->result_object();
+		$a['brand']	= $this->model_master->tampil_brand()->result_object();	
+		$this->load->view('admin/index', $a);
+	}
+
+	function tambah_produk_bakery(){
+		$this->cek_aktif();
+
+		$produksiID = $this->GenProduksiNumber();
+		$a['produksiID'] = $produksiID;
+		$a['page']	= "master/produk/tambah_produk_bakery";
+		$a['title'] = "Tambah Produk Khusus Bakery";
 		$a['suplier']	= $this->model_master->tampil_mitra()->result_object();	
 		$a['kategori']	= $this->model_master->tampil_kategori_prod()->result_object();
 		$a['satuan']	= $this->model_master->tampil_satuan()->result_object();

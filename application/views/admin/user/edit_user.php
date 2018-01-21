@@ -33,17 +33,17 @@
                 ?>
 				<div class="col-md-6">
 									<div class="form-group">
-										<input type="hidden" name="id" value="<?php echo $data->userID ?>">
+										<input type="hidden" name="id" value="<?php echo $data->nip ?>">
 										<label for="exampleInputEmail1">NIP</label>
-										<input type="text" class="form-control" name="nipp" value="<?php echo $data->userNIP; ?>" />
+										<input type="text" class="form-control" name="nipp" value="<?php echo $data->nipp; ?>" />
 									</div>
 									<div class="form-group">
 										<label for="exampleInputEmail1">Nama</label>
-										<input type="text" class="form-control" name="name" value="<?php echo $data->userFullName; ?>" />
+										<input type="text" class="form-control" name="name" value="<?php echo $data->nama_lengkap; ?>" />
 									</div>
 									<div class="form-group">
 										<label for="exampleInputEmail1">Phone</label>
-										<input type="text" class="form-control" name="phone" value="<?php echo $data->userPhone; ?>" />
+										<input type="text" class="form-control" name="phone" value="<?php echo $data->hp; ?>" />
 									</div>
 				</div>
 				<div class="col-md-6">
@@ -99,15 +99,7 @@
 												<option value="N" <?php echo $selected2; ?> >N ( Tidak Aktif )</option>
 										</select>
 									</div>
-									<div class="form-group">
-										<label for="exampleInputEmail1">Username</label>
-										<input type="text" class="form-control" name="username" value="<?php echo $data->userName; ?>" />
-									</div>
-									<div class="form-group">
-										<label for="exampleInputEmail1">Password</label>
-										<input type="password" class="form-control" name="password" />
-										<i>(* Bila password tidak akan dirubah, kosongkan saja </i>
-									</div>
+									 
                  </div>      
                   <a href="<?php echo base_url(); ?>admin/userman" class="btn btn-warning"><i class="fa fa-arrow-left"></i> Batal</a>
                   <button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Simpan</button>

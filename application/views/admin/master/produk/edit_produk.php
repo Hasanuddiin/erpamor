@@ -191,19 +191,8 @@
 												<input type="text" id="diskondatestop" name="diskondatestop" class="form-control" value="<?php echo $data->discount_end; ?>">
 											</div>
 										</div>
-										<div class="col-md-6" >
-											<div class="form-group">
-												<label for="exampleInputEmail1">Mulai jam</label>
-												<input type="time" name="jamMulai" id="Time" class="form-control" value="<?php echo $data->jam_start; ?>">
-											</div>
-											
-										</div>
-										<div class="col-md-6" >
-										<div class="form-group">
-												<label for="exampleInputEmail1">Berakhir jam</label>
-												<input type="time" name="jamAkhir" class="form-control" value="<?php echo $data->jam_end; ?>">
-											</div>
-										</div>
+										
+										
 									</div>
 				  </div>
 				  
