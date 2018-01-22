@@ -39,7 +39,7 @@
 											<div class="form-group">
 
 												
-												<input type="text" id="diskondatestart" name="tgl1" class="form-control" value="<?php echo strtotime("2018-01-21") <= strtotime('')?'': date("Y-m-d", strtotime("2018-01-21")); ?>">
+												<input type="text" id="diskondatestart" name="tgl1" class="form-control" value="">
 
 											</div>
 

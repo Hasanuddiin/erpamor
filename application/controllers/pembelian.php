@@ -77,7 +77,7 @@ class Pembelian extends CI_Controller
 		$tanggal1 = $this->input->post('tgl1');
 
 		//$tanggal1=$row_Recordset1['tgl1']; echo strtotime($tgl) <= strtotime('')?'': date("d-m-Y", strtotime($tgl));
-		//$tanggal1 = date("d-m-Y", strtotime(str_replace('"', '&quot;', $tgl['StatusActiveDate'])));
+		//$tanggal1 = date("Y/m/d", strtotime(str_replace('"', '&quot;', $tgl['StatusActiveDate'])));
 
 		$tanggal2 = $this->input->post('tgl2');
 

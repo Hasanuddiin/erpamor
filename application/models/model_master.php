@@ -1104,8 +1104,9 @@ public function hapus_trxbahan($id)
     	//WHERE trxDate BETWEEN '$tanggal1' AND '$tanggal2'";
 
     	$this->db->select('*');
-    	$this->db->from('as_order_transactionss');
-    	$this->db->where('trxDate', $tanggal1);
+    	$this->db->from('as_order_transactions');
+    	//$this->db->where('trxDate', $tanggal1);
+    	$this->db->where('trxDate BETWEEN "'. date('Y/m/d', strtotime($tanggal1)).'" AND "'. date('Y-m-d',strtotime($tanggal2)).'"');
     	//$query = $this->db->query("SELECT * from as_order_transactions WHERE trxDate BETWEEN ".date('Y-m-d', ($tanggal1))." AND ". date('Y-m-d', ($tanggal1))." ;");
          
     	
