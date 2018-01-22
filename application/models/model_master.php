@@ -940,7 +940,7 @@ public function hapus_trxbahan($id)
 	
 	public function tampil_khutang()
 	{
-		return $this->db->get('as_debts');
+		return $this->db->get('as_order_transactions');
 	}
 	
 	public function tampil_kpiutang()
@@ -1104,11 +1104,15 @@ public function hapus_trxbahan($id)
     	//WHERE trxDate BETWEEN '$tanggal1' AND '$tanggal2'";
 
     	$this->db->select('*');
-    	$this->db->from('as_order_transactions');
-    	$this->db->where('trxDate BETWEEN "'. date('Y-m-d', strtotime($tanggal1)).'" AND "'. date('Y-m-d',strtotime($tanggal2)).'"');
+    	$this->db->from('as_order_transactionss');
+    	$this->db->where('trxDate', $tanggal1);
+    	//$query = $this->db->query("SELECT * from as_order_transactions WHERE trxDate BETWEEN ".date('Y-m-d', ($tanggal1))." AND ". date('Y-m-d', ($tanggal1))." ;");
+         
+    	
     	//$this->db->where('trxDate <= date "'.$tanggal2.'"');
-    	$query = $this->db->get('as_order_transactions');
-    	return $query->result();
+    	//$query = $this->db->get();
+    	//return $query->result();
+    	return $this->db->get();
     }
 
 

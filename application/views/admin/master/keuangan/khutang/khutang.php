@@ -42,11 +42,11 @@
 						<th>No.</th>
 						<th>Tgl</th>
                         <th>No. Faktur</th>
-						<th>ID Supplier</th>
-						<th>Nama</th>
+						
+						<th>Nama Vendor</th>
 						<th>Jumlah</th>
-						<th>Bayar</th>
-						<th>Sisa</th>
+						<th>Cara Bayar</th>
+				
 						<th>Status</th>
 						<th>Jatuh Tempo</th>
 						<th>Aksi</th>
@@ -58,15 +58,37 @@
                         ?>
                     	<tr>
 							<td><?php echo $no++; ?></td>
-                    		<td><?php echo $lihat->createdDate; ?></td>
-							<td><?php echo $lihat->invoiceID; ?></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
+              <td><?php echo $lihat->trxDate; ?></td>
+							<td><?php echo $lihat->invoiceOrderID; ?></td>
+							<td><?php echo $lihat->trxFullName; ?></td>
+							<td><?php echo number_format($lihat->trxTotal); ?></td>
+              <td><?php if($lihat->trxStatus == '2')
+              {
+                echo "Termin";
+              }
+              else
+              {
+                echo "Cash";
+              }?>
+
+							</td>
+							
+              <td>
+              <?php $today=date('Y-m-d') ?>
+              <?php
+              if($lihat->trxTerminDate >= $today)
+              {
+                echo "Belum Lunas";
+              }
+              else
+              {
+                echo "Lunas";
+              }
+              ?>
+
+							</td>
+							<td><?php echo $lihat->trxTerminDate; ?></td>
+						
 						
 							
                         <td align="center">
