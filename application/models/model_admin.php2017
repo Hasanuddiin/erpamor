@@ -22,7 +22,29 @@ class Model_admin extends CI_Model {
 		return $this->db->get();
 
     }
+    
+    public function tampil_trxtoko($today)
+	{
+		
+		$this->db->select('*');
+		$this->db->from('as_sales_transactions');
+		$this->db->where('trxDate', $today);
+		$this->db->where('identityID',5);
+		return $this->db->get();
+	}
 
+	public function prod_trxtoko($today)
+	{
+		
+		$this->db->select('SUM(as_sales_detail_transactions.detailQty) as qty');
+		$this->db->from('as_sales_detail_transactions');
+		$this->db->from('as_sales_transactions');
+		$this->db->where('as_sales_transactions.invoiceID = as_sales_detail_transactions.invoiceID');
+		$this->db->where('as_sales_transactions.trxDate', $today);
+		$this->db->where('as_sales_transactions.identityID',5);
+		return $this->db->get();
+	}
+    
     function get_order($today)
     {
 		$this->db->select('*');
@@ -82,28 +104,6 @@ class Model_admin extends CI_Model {
 		$this->db->where('as_sales_transactions.invoiceID = as_sales_detail_transactions.invoiceID');
 		$this->db->where('as_sales_transactions.trxDate', $today);
 		$this->db->where('as_sales_transactions.identityID',3);
-		return $this->db->get();
-	}
-
-	public function tampil_trxtoko($today)
-	{
-		
-		$this->db->select('*');
-		$this->db->from('as_sales_transactions');
-		$this->db->where('trxDate', $today);
-		$this->db->where('identityID',5);
-		return $this->db->get();
-	}
-
-	public function prod_trxtoko($today)
-	{
-		
-		$this->db->select('SUM(as_sales_detail_transactions.detailQty) as qty');
-		$this->db->from('as_sales_detail_transactions');
-		$this->db->from('as_sales_transactions');
-		$this->db->where('as_sales_transactions.invoiceID = as_sales_detail_transactions.invoiceID');
-		$this->db->where('as_sales_transactions.trxDate', $today);
-		$this->db->where('as_sales_transactions.identityID',5);
 		return $this->db->get();
 	}
 

@@ -81,7 +81,7 @@
               ?>
                     </tbody>
                     </table>
-              <h4>Total Penjualan (<i> Hari ini <?php echo date('d-m-Y'); ?></i>): Rp.  <b><?php foreach($totalpendapatan as $data): 
+              <h4>Total Penjualan (<i> Hari ini <?php echo date('d-m-Y'); ?></i>): Rp.  <b><?php foreach($totalPendToday as $data): 
             echo number_format($data->Totaltoday); 
             endforeach ?></b></h4>
 

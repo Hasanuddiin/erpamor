@@ -334,6 +334,31 @@ public function hapus_trxbahan($id)
 		return $this->db->get();
 	}
 
+	public function tampil_kategorytoday_tgl($start,$end,$bolu)
+	{
+		
+		$this->db->select('Sum(as_sales_detail_transactions.detailSubtotal) as jumlah');
+
+	
+		$this->db->from('as_sales_detail_transactions');
+		$this->db->from('as_categories_produk');
+		$this->db->from('as_products');
+		$this->db->from('as_sales_transactions');
+		//$this->db->from('as_pegawai');
+
+		$this->db->where('as_sales_detail_transactions.productBarcode = as_products.productBarcode');
+		$this->db->where('as_categories_produk.categoryID = as_products.categoryID');
+		$this->db->where('as_sales_transactions.invoiceID = as_sales_detail_transactions.invoiceID');
+		$this->db->where('as_categories_produk.categoryName',$bolu);
+		//$this->db->group_by('as_categories_produk.categoryName');	
+		$this->db->where('as_sales_transactions.trxDate BETWEEN "'. date('Y-m-d', strtotime($start)). '" and "'. date('Y-m-d', strtotime($end)).'"');
+		//$this->db->where('as_sales_transactions.trxDate', $today);
+		$this->db->where('as_sales_transactions.identityID', 3);
+		//$this->db->where('as_pegawai.nip = as_sales_transactions.userID');
+
+		return $this->db->get();
+	}
+
 	public function tampil_kategoryDjavamos($today,$Djavamous)
 	{
 		
@@ -357,6 +382,29 @@ public function hapus_trxbahan($id)
 		return $this->db->get();
 	}
 
+	public function tampil_kategoryDjavamos_tgl($start,$end,$Djavamous)
+	{
+		
+		$this->db->select('Sum(as_sales_detail_transactions.detailSubtotal) as jumlahDjavamous');
+	
+		$this->db->from('as_sales_detail_transactions');
+		$this->db->from('as_categories_produk');
+		$this->db->from('as_products');
+		$this->db->from('as_sales_transactions');
+		//$this->db->from('as_pegawai');
+
+		$this->db->where('as_sales_detail_transactions.productBarcode = as_products.productBarcode');
+		$this->db->where('as_categories_produk.categoryID = as_products.categoryID');
+		$this->db->where('as_sales_transactions.invoiceID = as_sales_detail_transactions.invoiceID');
+		$this->db->where('as_categories_produk.categoryName',$Djavamous);
+		//$this->db->group_by('as_categories_produk.categoryName');	
+		//$this->db->where('as_sales_transactions.trxDate', $today);
+		$this->db->where('as_sales_transactions.trxDate BETWEEN "'. date('Y-m-d', strtotime($start)). '" and "'. date('Y-m-d', strtotime($end)).'"');
+		$this->db->where('as_sales_transactions.identityID', 3);
+		//$this->db->where('as_pegawai.nip = as_sales_transactions.userID');
+
+		return $this->db->get();
+	}
 	public function tampil_kategoryCookies($today,$Cookies)
 	{
 		
@@ -380,6 +428,29 @@ public function hapus_trxbahan($id)
 		return $this->db->get();
 	}
 
+	public function tampil_kategoryCookies_tgl($start,$end,$Cookies)
+	{
+		
+		$this->db->select('Sum(as_sales_detail_transactions.detailSubtotal) as jumlahCookies');
+	
+		$this->db->from('as_sales_detail_transactions');
+		$this->db->from('as_categories_produk');
+		$this->db->from('as_products');
+		$this->db->from('as_sales_transactions');
+		//$this->db->from('as_pegawai');
+
+		$this->db->where('as_sales_detail_transactions.productBarcode = as_products.productBarcode');
+		$this->db->where('as_categories_produk.categoryID = as_products.categoryID');
+		$this->db->where('as_sales_transactions.invoiceID = as_sales_detail_transactions.invoiceID');
+		$this->db->where('as_categories_produk.categoryName',$Cookies);
+		//$this->db->group_by('as_categories_produk.categoryName');	
+		//$this->db->where('as_sales_transactions.trxDate', $today);
+		$this->db->where('as_sales_transactions.trxDate BETWEEN "'. date('Y-m-d', strtotime($start)). '" and "'. date('Y-m-d', strtotime($end)).'"');
+		$this->db->where('as_sales_transactions.identityID', 3);
+		//$this->db->where('as_pegawai.nip = as_sales_transactions.userID');
+
+		return $this->db->get();
+	}
 
 
 
@@ -400,6 +471,30 @@ public function hapus_trxbahan($id)
 		$this->db->where('as_categories_produk.categoryName',$ModernCake);
 		//$this->db->group_by('as_categories_produk.categoryName');	
 		$this->db->where('as_sales_transactions.trxDate', $today);
+		$this->db->where('as_sales_transactions.identityID', 3);
+		//$this->db->where('as_pegawai.nip = as_sales_transactions.userID');
+
+		return $this->db->get();
+	}
+
+	public function tampil_kategoryModernCake_tgl($start,$end,$ModernCake)
+	{
+		
+		$this->db->select('Sum(as_sales_detail_transactions.detailSubtotal) as jumlahModernCake');
+	
+		$this->db->from('as_sales_detail_transactions');
+		$this->db->from('as_categories_produk');
+		$this->db->from('as_products');
+		$this->db->from('as_sales_transactions');
+		//$this->db->from('as_pegawai');
+
+		$this->db->where('as_sales_detail_transactions.productBarcode = as_products.productBarcode');
+		$this->db->where('as_categories_produk.categoryID = as_products.categoryID');
+		$this->db->where('as_sales_transactions.invoiceID = as_sales_detail_transactions.invoiceID');
+		$this->db->where('as_categories_produk.categoryName',$ModernCake);
+		//$this->db->group_by('as_categories_produk.categoryName');	
+		//$this->db->where('as_sales_transactions.trxDate', $today);
+		$this->db->where('as_sales_transactions.trxDate BETWEEN "'. date('Y-m-d', strtotime($start)). '" and "'. date('Y-m-d', strtotime($end)).'"');
 		$this->db->where('as_sales_transactions.identityID', 3);
 		//$this->db->where('as_pegawai.nip = as_sales_transactions.userID');
 
@@ -426,6 +521,30 @@ public function hapus_trxbahan($id)
 
 		return $this->db->get();
 	}
+
+	public function tampil_kategoryMochi_tgl($start,$end,$Mochi)
+	{
+		
+		$this->db->select('Sum(as_sales_detail_transactions.detailSubtotal) as jumlahMochi');
+	
+		$this->db->from('as_sales_detail_transactions');
+		$this->db->from('as_categories_produk');
+		$this->db->from('as_products');
+		$this->db->from('as_sales_transactions');
+		//$this->db->from('as_pegawai');
+
+		$this->db->where('as_sales_detail_transactions.productBarcode = as_products.productBarcode');
+		$this->db->where('as_categories_produk.categoryID = as_products.categoryID');
+		$this->db->where('as_sales_transactions.invoiceID = as_sales_detail_transactions.invoiceID');
+		$this->db->where('as_categories_produk.categoryName',$Mochi);
+		//$this->db->group_by('as_categories_produk.categoryName');	
+		//$this->db->where('as_sales_transactions.trxDate', $today);
+		$this->db->where('as_sales_transactions.trxDate BETWEEN "'. date('Y-m-d', strtotime($start)). '" and "'. date('Y-m-d', strtotime($end)).'"');
+
+		//$this->db->where('as_pegawai.nip = as_sales_transactions.userID');
+
+		return $this->db->get();
+	}
 	
 	public function tampil_kategorySnack($today,$Snack)
 	{
@@ -448,6 +567,30 @@ public function hapus_trxbahan($id)
 
 		return $this->db->get();
 	}
+
+	public function tampil_kategorySnack_tgl($start,$end,$Snack)
+	{
+		
+		$this->db->select('Sum(as_sales_detail_transactions.detailSubtotal) as jumlahSnack');
+	
+		$this->db->from('as_sales_detail_transactions');
+		$this->db->from('as_categories_produk');
+		$this->db->from('as_products');
+		$this->db->from('as_sales_transactions');
+		//$this->db->from('as_pegawai');
+
+		$this->db->where('as_sales_detail_transactions.productBarcode = as_products.productBarcode');
+		$this->db->where('as_categories_produk.categoryID = as_products.categoryID');
+		$this->db->where('as_sales_transactions.invoiceID = as_sales_detail_transactions.invoiceID');
+		$this->db->where('as_categories_produk.categoryName',$Snack);
+		//$this->db->group_by('as_categories_produk.categoryName');	
+		//$this->db->where('as_sales_transactions.trxDate', $today);
+		$this->db->where('as_sales_transactions.trxDate BETWEEN "'. date('Y-m-d', strtotime($start)). '" and "'. date('Y-m-d', strtotime($end)).'"');
+		//$this->db->where('as_pegawai.nip = as_sales_transactions.userID');
+
+		return $this->db->get();
+	}
+
 	public function tampil_kategoryCafe($today,$Cafe)
 	{
 	
@@ -465,6 +608,29 @@ public function hapus_trxbahan($id)
 		$this->db->where('as_categories_produk.categoryName',$Cafe);
 		//$this->db->group_by('as_categories_produk.categoryName');	
 		$this->db->where('as_sales_transactions.trxDate', $today);
+		//$this->db->where('as_pegawai.nip = as_sales_transactions.userID');
+
+		return $this->db->get();
+	}
+
+	public function tampil_kategoryCafe_tgl($start,$end,$Cafe)
+	{
+	
+		$this->db->select('Sum(as_sales_detail_transactions.detailSubtotal) as jumlahCafe');
+	
+		$this->db->from('as_sales_detail_transactions');
+		$this->db->from('as_categories_produk');
+		$this->db->from('as_products');
+		$this->db->from('as_sales_transactions');
+		//$this->db->from('as_pegawai');
+
+		$this->db->where('as_sales_detail_transactions.productBarcode = as_products.productBarcode');
+		$this->db->where('as_categories_produk.categoryID = as_products.categoryID');
+		$this->db->where('as_sales_transactions.invoiceID = as_sales_detail_transactions.invoiceID');
+		$this->db->where('as_categories_produk.categoryName',$Cafe);
+		//$this->db->group_by('as_categories_produk.categoryName');	
+		//$this->db->where('as_sales_transactions.trxDate', $today);
+		$this->db->where('as_sales_transactions.trxDate BETWEEN "'. date('Y-m-d', strtotime($start)). '" and "'. date('Y-m-d', strtotime($end)).'"');
 		//$this->db->where('as_pegawai.nip = as_sales_transactions.userID');
 
 		return $this->db->get();
@@ -888,6 +1054,16 @@ public function hapus_trxbahan($id)
 		return $this->db->get();
 	}
 
+	public function tampil_trxtodayBakery_tgl($start,$end)
+	{
+		$this->db->select('SUM(trxTotal)As Totaltoday');
+		$this->db->from('as_sales_transactions');
+		//$this->db->where('trxDate', $today);
+		$this->db->where('identityID',3);
+		$this->db->where('trxDate BETWEEN "'. date('Y-m-d', strtotime($start)). '" and "'. date('Y-m-d', strtotime($end)).'"');
+		return $this->db->get();
+	}
+
 
 
 	public function tampil_trxtotalBakery($bulan)
@@ -1104,21 +1280,31 @@ public function hapus_trxbahan($id)
     	//WHERE trxDate BETWEEN '$tanggal1' AND '$tanggal2'";
 
     	$this->db->select('*');
-<<<<<<< HEAD
-    	$this->db->from('as_order_transactionss');
-    	$this->db->where('trxDate BETWEEN', $start 'AND', $end);
-    	
-=======
     	$this->db->from('as_order_transactions');
-    	//$this->db->where('trxDate', $tanggal1);
-    	$this->db->where('trxDate BETWEEN "'. date('Y/m/d', strtotime($tanggal1)).'" AND "'. date('Y-m-d',strtotime($tanggal2)).'"');
->>>>>>> df9078dd735fbb2de4ba4bb1208bebfe089e7efb
-    	//$query = $this->db->query("SELECT * from as_order_transactions WHERE trxDate BETWEEN ".date('Y-m-d', ($tanggal1))." AND ". date('Y-m-d', ($tanggal1))." ;");
+    	//$this->db->where('trxDate BETWEEN', $start);
+    	//$this->db->where('trxDate',$end);
+    	$this->db->where('trxDate BETWEEN "'. date('Y-m-d', strtotime($start)). '" and "'. date('Y-m-d', strtotime($end)).'"');
+    	
+    	//$query = $this->db->query("SELECT * from as_order_transactions WHERE trxDate BETWEEN ".$start." AND ".$end.";");
          
     	
     	//$this->db->where('trxDate <= date "'.$tanggal2.'"');
     	//$query = $this->db->get();
     	//return $query->result();
+    	return $this->db->get();
+    }
+
+    function tampilkan_transaksi_all_order_by_tgl_sum($start,$end)
+    {	
+    	//$query="SELECT * from as_order_transactions
+    	//WHERE trxDate BETWEEN '$tanggal1' AND '$tanggal2'";
+
+    	$this->db->select('Sum(as_order_transactions.trxTotal) AS jumlah');
+    	$this->db->from('as_order_transactions');
+    	
+    	$this->db->where('trxDate BETWEEN "'. date('Y-m-d', strtotime($start)). '" and "'. date('Y-m-d', strtotime($end)).'"');
+    	
+    	
     	return $this->db->get();
     }
 

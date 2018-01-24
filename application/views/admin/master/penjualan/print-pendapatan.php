@@ -92,7 +92,7 @@ table.header tr,td { border: none; text-align:left; padding:2px; }
                         foreach ($data as $bolu):
                         ?>
                       <tr>
-              <td><?php echo date('d / M / y'); ?></td>
+              <td><?php echo date($dateStart); ?> &nbsp;- &nbsp;<?php echo date($dateEnd); ?></td>
               <td><?php echo number_format($bolu->jumlah);?></td>
                     <?php endforeach ?>
                     <?php  
@@ -207,7 +207,7 @@ table.header tr,td { border: none; text-align:left; padding:2px; }
                     
               <table id="example1" class="table table-bordered table-hover dataTable">
               <th><h4><b>TOTAL PENDAPATAN  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></h4> </th>
-              <th> <h4> Rp.  <b><?php foreach($totalPendToday as $data): 
+              <th> <h4> Rp.  <b><?php foreach($totalTodayPenBakery as $data): 
             echo number_format($data->Totaltoday);?></b></h4></th>
             <?php  
                         endforeach;
@@ -252,7 +252,7 @@ table.header tr,td { border: none; text-align:left; padding:2px; }
       </div><!-- /.content-wrapper -->
 
 <script type="text/javascript">
-      window.onload = function() { window.print();document.location.href =  "<?php  echo base_url('admin'); ?>"; }
+      window.onload = function() { window.print();document.location.href =  "<?php  echo base_url('admin/showreporttoday'); ?>"; }
  </script>
  
  

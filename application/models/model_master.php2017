@@ -247,17 +247,7 @@ public function hapus_trxbahan($id)
 	public function tampil_trxpjtoday($today, $user)
 	{
 		$this->db->select('*');
-		$this->db->from('as_sales_transactions');
-		$this->db->from('as_pegawai');
-		$this->db->where('trxDate', $today);
-		$this->db->where('as_pegawai.nip = as_sales_transactions.userID');
-
-		return $this->db->get();
-	}
-
-	public function tampil_trxpjtodayToko($today)
-	{
-		$this->db->select('*');
+	
 		$this->db->from('as_sales_transactions');
 		$this->db->from('as_pegawai');
 		$this->db->where('trxDate', $today);
@@ -698,16 +688,15 @@ public function hapus_trxbahan($id)
 		return $this->db->get();
 	}
 
-	public function tampil_trxsumtodaytoko($today)
+    public function tampil_trxsumtodaytoko($today)
 	{
 		$this->db->select('SUM(trxTotal)As Totaltoday');
 		$this->db->from('as_sales_transactions');
 		$this->db->where('trxDate', $today);
-		//$this->db->where('userID', $user);
+		$this->db->where('identityID', 5);
 		//$this->db->where('userID', $user);
 		return $this->db->get();
 	}
-
 	public function tampil_trxsumtodayBakery($today,$user)
 	{
 		$this->db->select('SUM(trxTotal)As Totaltoday');
@@ -750,6 +739,39 @@ public function hapus_trxbahan($id)
 		return $this->db->get();
 	}
 	
+	public function tampil_trxpjtodayToko($today)
+	{
+		$this->db->select('*');
+		$this->db->from('as_sales_transactions');
+		$this->db->from('as_pegawai');
+		$this->db->where('trxDate', $today);
+		$this->db->where('as_pegawai.nip = as_sales_transactions.userID');
+
+		return $this->db->get();
+	}
+	
+
+
+	
+	
+	public function tampil_trxtotaltoko($bulan)
+	{
+		$this->db->select('SUM(trxTotal)As total_bulan');
+		$this->db->from('as_sales_transactions');
+		$this->db->where('identityID',5);
+		$this->db->where('MONTH(trxDate)',$bulan);
+		return $this->db->get();
+	}
+	
+	public function tampil_trxtodayToko($today)
+	{
+		$this->db->select('SUM(trxTotal)As Totaltoday');
+		$this->db->from('as_sales_transactions');
+		$this->db->where('trxDate', $today);
+		$this->db->where('identityID',5);
+		return $this->db->get();
+	}
+	
 	public function tampil_trxtodaybca($today,$bca)
 	{
 		$this->db->select('SUM(trxTotal)As Totaltoday');
@@ -776,30 +798,14 @@ public function hapus_trxbahan($id)
 		$this->db->where('identityID',3);
 		return $this->db->get();
 	}
-
-	public function tampil_trxtodayToko($today)
-	{
-		$this->db->select('SUM(trxTotal)As Totaltoday');
-		$this->db->from('as_sales_transactions');
-		$this->db->where('trxDate', $today);
-		$this->db->where('identityID',5);
-		return $this->db->get();
-	}
+	
+	
 
 	public function tampil_trxtotalBakery($bulan)
 	{
 		$this->db->select('SUM(trxTotal)As total');
 		$this->db->from('as_sales_transactions');
 		$this->db->where('identityID',3);
-		$this->db->where('MONTH(trxDate)',$bulan);
-		return $this->db->get();
-	}
-
-	public function tampil_trxtotaltoko($bulan)
-	{
-		$this->db->select('SUM(trxTotal)As total_bulan');
-		$this->db->from('as_sales_transactions');
-		$this->db->where('identityID',5);
 		$this->db->where('MONTH(trxDate)',$bulan);
 		return $this->db->get();
 	}

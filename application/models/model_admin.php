@@ -226,6 +226,18 @@ class Model_admin extends CI_Model {
 		return $this->db->get();
 	}
 
+	public function tampil_trx_user_today_close_debit_tgl($start,$end)
+	{
+		
+		$this->db->select('SUM(trxTotal) AS totalDebit');
+		$this->db->from('as_sales_transactions');
+		$this->db->where('trxbankmethod','debit');
+		$this->db->where('as_sales_transactions.trxDate BETWEEN "'. date('Y-m-d', strtotime($start)). '" and "'. date('Y-m-d', strtotime($end)).'"');
+		$this->db->where('as_sales_transactions.identityID', 3);
+		//$this->db->where('userID', $user);
+		return $this->db->get();
+	}
+
 	public function tampil_trx_user_today_close_bca($today)
 	{
 		
@@ -237,6 +249,19 @@ class Model_admin extends CI_Model {
 		return $this->db->get();
 	}
 
+	public function tampil_trx_user_today_close_bca_tgl($start,$end)
+	{
+		
+		$this->db->select('SUM(trxTotal) AS totalBca');
+		$this->db->from('as_sales_transactions');
+		$this->db->where('trxbankmember','bca');
+		$this->db->where('as_sales_transactions.trxDate BETWEEN "'. date('Y-m-d', strtotime($start)). '" and "'. date('Y-m-d', strtotime($end)).'"');
+		$this->db->where('as_sales_transactions.identityID', 3);
+		//$this->db->where('trxDate', $today);
+		//$this->db->where('userID', $user);
+		return $this->db->get();
+	}
+
 	public function tampil_trx_user_today_close_mandiri($today)
 	{
 		
@@ -244,6 +269,18 @@ class Model_admin extends CI_Model {
 		$this->db->from('as_sales_transactions');
 		$this->db->where('trxbankmember','mandiri');
 		$this->db->where('trxDate', $today);
+		//$this->db->where('userID', $user);
+		return $this->db->get();
+	}
+
+	public function tampil_trx_user_today_close_mandiri_tgl($start,$end)
+	{
+		
+		$this->db->select('SUM(trxTotal) AS totalMandiri');
+		$this->db->from('as_sales_transactions');
+		$this->db->where('trxbankmember','mandiri');
+		$this->db->where('as_sales_transactions.trxDate BETWEEN "'. date('Y-m-d', strtotime($start)). '" and "'. date('Y-m-d', strtotime($end)).'"');
+		$this->db->where('as_sales_transactions.identityID', 3);
 		//$this->db->where('userID', $user);
 		return $this->db->get();
 	}

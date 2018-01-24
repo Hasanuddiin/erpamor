@@ -1,5 +1,5 @@
-<<<<<<< HEAD
 <div class="content-wrapper">
+ 
 
 	<!-- Content Header (Page header) -->
 
@@ -37,33 +37,30 @@
                                   
                                       
 				<div class="box-header">
-				  <h3 class="box-title">Select Date</h3>
-				</div>
-				<div class="box-body">
-				
-				  <!-- /.form group -->
-				  <form method="post">
+				<form method="post">
 					<div class="form-group col-md-6">
-						<label>Date range:</label>
-
+						
 						<div class="input-group">
 						  <div class="input-group-addon">
 							<i class="fa fa-calendar"></i>
+							
 						  </div>
 						<input type="text" name="date" class="form-control pull-right active" id="reservation" required>
+
 					</div>
                 <!-- /.input group -->
 					</div>
-              <!-- /.form group --><br>
-					<button type="submit" class="btn btn-primary" name="display">Display</button>
+					<button type="submit" class="btn btn-danger" name="display">GO</button>
+             
+					
 				</form>
 				
-            </div>
+				</div>
+				
 
 										
 
-										<a id="btnExport" class="btn btn-sm btn-success btn-flat"><i class="fa  fa-file-excel-o"></i> Export to excel</a>
-
+										
                                     </div>
 
 			<div class="box-body">
@@ -153,6 +150,9 @@
 						</tbody>
 
 					</table>
+					
+					
+					
 
 				</div>
 
@@ -179,7 +179,63 @@
 
 
 		<script>
+			$(function () {
+        //Datemask dd/mm/yyyy
+        $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+        //Datemask2 mm/dd/yyyy
+        $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
+        //Money Euro
+        $("[data-mask]").inputmask();
 
+        //Date range picker
+        $('#reservation').daterangepicker();
+        //Date range picker with time picker
+        $('#reservationtime').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
+        //Date range as a button
+        $('#daterange-btn').daterangepicker(
+                {
+                  ranges: {
+                    'Today': [moment(), moment()],
+                    'Yesterday': [moment().subtract('days', 1), moment().subtract('days', 1)],
+                    'Last 7 Days': [moment().subtract('days', 6), moment()],
+                    'Last 30 Days': [moment().subtract('days', 29), moment()],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
+                  },
+                  startDate: moment().subtract('days', 29),
+                  endDate: moment()
+                },
+        function (start, end) {
+          $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        }
+        );
+
+        //iCheck for checkbox and radio inputs
+        $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+          checkboxClass: 'icheckbox_minimal-blue',
+          radioClass: 'iradio_minimal-blue'
+        });
+        //Red color scheme for iCheck
+        $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+          checkboxClass: 'icheckbox_minimal-red',
+          radioClass: 'iradio_minimal-red'
+        });
+        //Flat red color scheme for iCheck
+        $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+          checkboxClass: 'icheckbox_flat-green',
+          radioClass: 'iradio_flat-green'
+        });
+
+        //Colorpicker
+        $(".my-colorpicker1").colorpicker();
+        //color picker with addon
+        $(".my-colorpicker2").colorpicker();
+
+        //Timepicker
+        $(".timepicker").timepicker({
+          showInputs: false
+        });
+      });
 
 
 			$(document).ready(function(){
@@ -218,7 +274,7 @@
 
 
 
-
+					
 
 
 
@@ -280,291 +336,6 @@
 
   });
 
-});
-
-		</script>
-
-	</div>
-
-=======
-<div class="content-wrapper">
-
-	<!-- Content Header (Page header) -->
-
-	<section class="content-header">
-
-		<h3>
-
-			<?php echo $title; ?>
-
-		</h3>
-
-		<ol class="breadcrumb">
-
-			<li><i class="fa fa-dashboard"></i> </li>
-
-			<li><a href="<?php echo base_url(); ?>penerimaan"> <?php echo $title; ?></a></li>
-
-			<li class="active">add</li>
-
-		</ol>
-
-	</section>
-
-
-
-
-
-	<section class="content">
-
-		<div class="box box-info">
-
-			<div class="box-header with-border"> Transaki dari tanggal :</div>
-			<div class="form-group">
-
-                                  
-                                        <div class="col-md-2" >
-
-											<div class="form-group">
-
-												
-												<input type="text" id="diskondatestart" name="tgl1" class="form-control" value="">
-
-											</div>
-
-										</div>
-
-										<div class="col-md-2" >
-
-											<div class="form-group">
-
-												
-
-												<input type="text" id="diskondatestop" name="tgl2" class="form-control" value="">
-
-											</div>
-
-										</div>
-
-										<a href="<?php echo base_url(); ?>pembelian/daftar_po_bytgl" class="btn btn-sm btn-warning btn-flat"><i class="fa fa-play"></i> Go</a>
-
-										<a id="btnExport" class="btn btn-sm btn-success btn-flat"><i class="fa  fa-file-excel-o"></i> Export to excel</a>
-
-                                    </div>
-
-			<div class="box-body">
-
-			
-
-			
-
-												
-                                
-
-			
-
-
-
-				<table id="example1" id="table_wrapper" class="table table-bordered table-hover dataTable">
-
-					<thead>
-
-						<tr>
-
-							<th>No.</th>
-
-							<th>No PO</th>
-
-							<th>Supplier</th>
-
-							<th>Total Pembelian</th>
-
-							<th>Tanggal PO</th>
-							<th>Jatuh Tempo</th>
-							<th>Status</th>
-
-							<th>Aksi</th>
-
-
-
-						</thead>
-
-						<tbody>
-
-							<?php $i = 0; foreach ($list_buy as $data) { $i++; ?>
-
-
-
-							<tr>
-
-								<td><?= $i ?></td>
-
-								<td class="nr"><?= $data->invoiceOrderID ?></td>
-
-								<td><?= $data->trxFullName ?><br/><small><?= $data->trxAddress ?> (<?= $data->trxPhone ?>)</small></td>
-
-								<td align="right"><?= number_format($data->trxTotal) ?></td>
-
-								<td align="center"><?= date("d-m-Y", strtotime($data->trxDate)) ?></td>
-								<td align="center"><?= date("d-m-Y", strtotime($data->trxTerminDate)) ?></td>
-								<td>
-              						<?php $today=date('Y-m-d') ?>
-              						<?php
-              						if($data->trxTerminDate >= $today)
-              						{
-                						echo "Belum Lunas";
-              						}
-              						else
-              						{
-                						echo "Lunas";
-              						}
-              						?>
-
-							</td>
-
-								<td>
-
-									<button class="btnShow1 btn btn-info btn-sm" id="btnShow1" ><i class="fa fa-search"></i> Detail</button>
-
-									<a href="<?php echo base_url(); ?>pembelian/hapus_po/<?php echo $data->invoiceOrderID ?>" onclick="javascript: return confirm('Anda yakin akan menghapus data ini ?')" class="btn btn-sm btn-danger btn-flat"><i class="fa fa-trash"></i> Hapus</a>
-
-								</td>
-
-								
-
-							</tr>
-
-							<?php } ?>
-
-						</tbody>
-
-					</table>
-
-				</div>
-
-				
-
-
-
-
-
-			</div>
-
-
-
-			<div id="dialog1" style="display: none" align = "center">
-
-				<div id="resultdiv"></div>
-
-			</div>
-
-
-
-		</section>
-
-
-
-		<script>
-
-
-
-			$(document).ready(function(){
-
-
-
-				$( ".btnShow1" ).on('click', function() {
-
-					  var row = $(this).closest("tr");    // Find the row
-
-                      var id = row.find(".nr").text(); // Find the text
-
-				// alert(id);
-
-				$('#dialog1').dialog('open');
-
-				$.ajax({
-
-					type:'POST',
-
-
-
-					url:'<?php echo base_url("pembelian/pop_detail/"); ?>',
-
-					data:{'id':id},
-
-					success:function(data){
-
-						$('#resultdiv').html(data);
-
-					}
-
-				});
-
-			});
-
-
-
-
-
-
-
-				$("#dialog1").dialog({
-
-					modal: true,
-
-					autoOpen: false,
-
-					maxWidth:900,
-
-					maxHeight: 500,
-
-					width: 900,
-
-					height: 500,
-
-					modal: true,
-
-
-
-					title: "DETAIL"
-
-				});
-
-
-
-
-
-			});
-
-
-
-			$(document).ready(function() {
-
- 			 $("#btnExport").click(function(e) {
-
-    			e.preventDefault();
-
-
-
-    //getting data from our table
-
-    var data_type = 'data:application/vnd.ms-excel';
-
-    var table_div = document.getElementById('table_wrapper');
-
-    var table_html = table_div.outerHTML.replace(/ /g, '%20');
-
-
-
-    var a = document.createElement('a');
-
-    a.href = data_type + ', ' + table_html;
-
-    a.download = 'exported_table_' + Math.floor((Math.random() * 9999999) + 1000000) + '.xls';
-
-    a.click();
-
-  });
 
 });
 
@@ -572,4 +343,3 @@
 
 	</div>
 
->>>>>>> df9078dd735fbb2de4ba4bb1208bebfe089e7efb

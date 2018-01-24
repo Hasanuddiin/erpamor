@@ -183,7 +183,6 @@
 												<label for="exampleInputEmail1">Mulai Diskon:</label>
 												<input type="text" id="diskondatestart" name="diskondatestart" class="form-control" value="<?php echo $data->discount_start; ?>">
 											</div>
-
 										</div>
 										<div class="col-md-6" >
 											<div class="form-group">
@@ -191,8 +190,6 @@
 												<input type="text" id="diskondatestop" name="diskondatestop" class="form-control" value="<?php echo $data->discount_end; ?>">
 											</div>
 										</div>
-										
-										
 									</div>
 				  </div>
 				  

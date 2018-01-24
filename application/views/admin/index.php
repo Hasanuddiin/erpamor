@@ -12,20 +12,33 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datepicker/datepicker3.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables/dataTables.bootstrap.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/css/AdminLTE.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style-main.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css">
+
     <!-- AdminLTE Skins. Choose a skin from the css/skins
     folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/css/skins/_all-skins.min.css">
     <!-- Date Picker -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datepicker/datepicker3.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css">
+   
+    <script src="<?php echo base_url(); ?>assets/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/jQuery/jquery-ui.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/jquery.number.js"></script>
+
+    <script src="<?php echo base_url(); ?>assets/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>assets/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>assets/plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
+    <!-- date-range-picker -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>assets/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+    <!--  -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/jQuery/jquery-ui/jquery-ui.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/jQuery/jquery-ui/jquery-ui.theme.min.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -286,7 +299,7 @@
               <li class="treeview">
                 <a href="#">
                   <i class="fa fa-bar-chart"></i>
-                  <span>Penjualan Toko</span>
+                  <span>Penjualan Toko <small class="label pull-right bg-green">new</small></span>
                   <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
@@ -340,7 +353,7 @@
                 
                   <li><a href="<?php echo base_url(); ?>admin/showtrxpjtodaytoko"><i class="fa fa-angle-double-right"></i>Daftar Retur</a></li>
                 </ul>
-                <li><a href="http://localhost/pos-amor"><i class="fa fa-fw fa-desktop"></i> POS Kasir</a></li>
+                <li><a href="<?php echo base_url(); ?>admin/showreporttoday"><i class="fa fa-angle"><small class="label pull-right bg-green">new</small></i>Penjualan Bakery</a></li>
               </li>
                 </ul>
 
