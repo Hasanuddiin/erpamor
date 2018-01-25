@@ -942,6 +942,13 @@ public function hapus_trxbahan($id)
 	{
 		return $this->db->get('as_order_transactions');
 	}
+	public function tampil_khutang_tgl($start,$end)
+	{
+		$this->db->select('*');
+    	$this->db->from('as_order_transactions');
+    	$this->db->where('trxDate BETWEEN "'. date('Y-m-d', strtotime($start)). '" and "'. date('Y-m-d', strtotime($end)).'"');
+    	return $this->db->get();
+	}
 	
 	public function tampil_kpiutang()
 	{
@@ -951,6 +958,18 @@ public function hapus_trxbahan($id)
     	$this->db->from('as_receivables');
 		$this->db->join('as_receivables_payment', 'as_receivables.receivableID = as_receivables_payment.receivableID', 'left');
     	$this->db->join('as_sales_transactions', 'as_receivables.invoiceID = as_sales_transactions.invoiceID', 'left');
+		$this->db->group_by('as_receivables.receivableID');
+		return $this->db->get();
+	}
+	public function tampil_kpiutang_tgl($start,$end)
+	{
+		$this->db->select('*');
+		$this->db->select('SUM(receivablePay) as totalbayartermin');
+		$this->db->select('as_receivables.receivableID as idpiutang');
+    	$this->db->from('as_receivables');
+		$this->db->join('as_receivables_payment', 'as_receivables.receivableID = as_receivables_payment.receivableID', 'left');
+    	$this->db->join('as_sales_transactions', 'as_receivables.invoiceID = as_sales_transactions.invoiceID', 'left');
+    	$this->db->where('as_sales_transactions.trxDate BETWEEN "'. date('Y-m-d', strtotime($start)). '" and "'. date('Y-m-d', strtotime($end)).'"');
 		$this->db->group_by('as_receivables.receivableID');
 		return $this->db->get();
 	}
