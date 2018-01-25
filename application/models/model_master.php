@@ -704,6 +704,7 @@ public function hapus_trxbahan($id)
 		$this->db->select('Sum(as_sales_transactions.trxSubtotal) AS Rp');
 		$this->db->select('Sum(as_sales_detail_transactions.detailQty) AS jumlah');
 		$this->db->select('as_products.productSalePrice as harga');
+		$this->db->select('as_sales_transactions.trxDate as tgl');
 		
 		$this->db->select('as_sales_detail_transactions.productBarcode as barcode');
 		$this->db->select('as_categories_produk.categoryName as category');
@@ -724,6 +725,44 @@ public function hapus_trxbahan($id)
 		$this->db->where('as_sales_transactions.trxDate', $today);
 		$this->db->group_by('as_products.productBarcode');
 		$this->db->group_by('as_categories_produk.categoryName');
+		$this->db->group_by('as_sales_transactions.trxDate');
+		$this->db->order_by('as_sales_detail_transactions.detailQty');
+		//$this->db->group_by('as_categories_produk.categoryName');	
+		
+		//$this->db->where('as_pegawai.nip = as_sales_transactions.userID');
+
+		return $this->db->get();
+	}
+
+	public function tampil_rekappromo_tgl($start,$end,$user)
+	{
+	
+		$this->db->select('as_products.productName as produk');
+		$this->db->select('Sum(as_sales_transactions.trxSubtotal) AS Rp');
+		$this->db->select('Sum(as_sales_detail_transactions.detailQty) AS jumlah');
+		$this->db->select('as_products.productSalePrice as harga');
+		$this->db->select('as_sales_transactions.trxDate as tgl');
+		
+		$this->db->select('as_sales_detail_transactions.productBarcode as barcode');
+		$this->db->select('as_categories_produk.categoryName as category');
+		$this->db->select('as_sales_detail_transactions.detailModal - as_sales_detail_transactions.discPercent as hargaReal');
+		//$this->db->select('as_sales_detail_transactions.discPercent * as_sales_detail_transactions.detailModal / 100 as hargaReal');
+	
+		$this->db->from('as_products');
+		$this->db->from('as_sales_transactions');
+		$this->db->from('as_sales_detail_transactions');
+		$this->db->from('as_categories_produk');
+		//$this->db->from('as_pegawai');
+
+		$this->db->where('as_products.productBarcode = as_sales_detail_transactions.productBarcode');
+		$this->db->where('as_sales_transactions.invoiceID = as_sales_detail_transactions.invoiceID');
+		$this->db->where('as_products.categoryID = as_categories_produk.categoryID');
+		$this->db->where('as_products.discount_status',1);
+		$this->db->where('as_sales_transactions.trxDate BETWEEN "'. date('Y-m-d', strtotime($start)). '" and "'. date('Y-m-d', strtotime($end)).'"');
+		//$this->db->where('as_sales_transactions.trxDate', $today);
+		$this->db->group_by('as_products.productBarcode');
+		$this->db->group_by('as_categories_produk.categoryName');
+		$this->db->group_by('as_sales_transactions.trxDate');
 		$this->db->order_by('as_sales_detail_transactions.detailQty');
 		//$this->db->group_by('as_categories_produk.categoryName');	
 		

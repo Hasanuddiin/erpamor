@@ -1960,6 +1960,44 @@ class Admin extends CI_Controller {
 
 	function showrekappromo() {
 		$this->cek_aktif();
+		if (isset($_POST ['display'])){
+			$date=$_POST['date'];
+			$date=explode('-',$date);
+			$start=date("Y-m-d",strtotime($date[0]));
+			$end=date("Y-m-d",strtotime($date[1]));
+
+			$identity=$this->session->userdata('identityID');
+			$a['perusahaan']= $this->model_perusahaan->tampil_data_identity($identity)->result();
+			$user=$this->session->userdata('admin_user');
+		$a['list_kasir'] = $this->model_master->get_kasir();
+		
+		$a['data'] = $this->model_master->tampil_rekappromo_tgl($start,$end, $user)->result_object();
+		$a['totalpendapatan']= $this->model_master->tampil_trxtoday($start,$end)->result();
+		$a['totalPendToday']= $this->model_master->tampil_trxsumtoday($start,$end, $user)->result();
+		$a['page'] = "master/penjualan/show-rekap-promo-tgl";
+		$a['title'] = "Rekap Tagihan Promo Hari ini";
+		$this->load->view('admin/index',$a);
+			}
+		if (isset($_POST ['print'])){
+			$date=$_POST['date'];
+			$date=explode('-',$date);
+			$start=date("Y-m-d",strtotime($date[0]));
+			$end=date("Y-m-d",strtotime($date[1]));
+			
+			$identity=$this->session->userdata('identityID');
+			$a['perusahaan']= $this->model_perusahaan->tampil_data_identity($identity)->result();
+			$user=$this->session->userdata('admin_user');
+		$a['list_kasir'] = $this->model_master->get_kasir();
+		
+		$a['data'] = $this->model_master->tampil_rekappromo_tgl($start,$end, $user)->result_object();
+		$a['totalpendapatan']= $this->model_master->tampil_trxtoday($start,$end)->result();
+		$a['totalPendToday']= $this->model_master->tampil_trxsumtoday($start,$end, $user)->result();
+		$a['page'] = "master/penjualan/show-rekap-promo-print";
+		$a['title'] = "Rekap Tagihan Promo Hari ini";
+		$this->load->view('admin/index',$a);
+		}else{
+
+
 		$today=date('Y-m-d');
 		$user=$this->session->userdata('admin_user');
 		$a['list_kasir'] = $this->model_master->get_kasir();
@@ -1970,6 +2008,8 @@ class Admin extends CI_Controller {
 		$a['page'] = "master/penjualan/show-rekap-promo";
 		$a['title'] = "Rekap Tagihan Promo Hari ini";
 		$this->load->view('admin/index',$a);
+
+		}
 	}
 
 
