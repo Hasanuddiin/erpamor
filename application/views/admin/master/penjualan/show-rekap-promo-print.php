@@ -151,6 +151,7 @@ table.header tr,td { border: none; text-align:left; padding:2px; }
                   </div>
 
                 </div><!-- /.box-header -->
+                Sukabumi&nbsp;&nbsp;</td><td align="left"><?php echo date('d-m-Y'); ?></td>
 
                 <div class="box-body table-responsive no-padding">
 
@@ -265,6 +266,25 @@ table.header tr,td { border: none; text-align:left; padding:2px; }
              
 
                   </table>
+                  <div align="right">
+                  <td><br>
+                  <table border="0" width="100%" valign="top" class="trxapp" align="right">
+                  <tr>
+                  <td width="170">Manageer Marketing</td>
+                  <td width="27">&nbsp;</td>
+                  <td width="233">Menyetujui Accounting</td><td width="15"></td>
+                  <td ><p>Mengetahui GM</p></td>
+                  </tr>
+            <tr>
+            <td>Arigya Febrisa</td><td>&nbsp;</td>
+            <td>(.................................)</td><td></td>
+            <td width=108 height=100>Gamal Hasan</td>
+           </tr>
+           
+           </table>
+           
+
+                  </div>
 
                   
 
