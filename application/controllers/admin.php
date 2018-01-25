@@ -488,8 +488,8 @@ class Admin extends CI_Controller {
 
 		
 		$a['totalTodayPen']= $this->model_master->tampil_trxtoday($today)->result();
-		$a['totalTodayPenBakery']= $this->model_master->tampil_trxsumtodayBakery($today,$user)->result();
-		$a['page'] = "master/penjualan/print-pendapatan-today";
+		$a['totalPendToday']= $this->model_master->tampil_trxsumtodayBakery($today,$user)->result();
+		$a['page'] = "master/penjualan/print-pendapatan";
 		$a['title'] = "Pendaptan by Kategori Produk";
 		$this->load->view('admin/index',$a);
 	}
@@ -1995,50 +1995,6 @@ class Admin extends CI_Controller {
 
 	function showreporttoday() {
 		$this->cek_aktif();
-		if (isset($_POST['display'])){
-			$date=$_POST['date'];
-			$date=explode('-',$date);
-			$start=date("Y-m-d",strtotime($date[0]));
-			$end=date("Y-m-d",strtotime($date[1]));
-
-			$identity=$this->session->userdata('identityID');
-			$user=$this->session->userdata('admin_user');
-			//$trxDateprint = date('d-m-Y');
-			$a['trxDateprint']= $start;
-			$a['perusahaan']= $this->model_perusahaan->tampil_data_identity($identity)->result();
-
-			$a['dateStart'] = $start;
-			$a['dateEnd'] = $end;
-			$bolu="bolu";
-			$Djavamous="Djavamous";
-			$ModernCake="ModernCake";
-			$Mochi="Mochi";
-			$Snack="Snack";
-			$Cafe="Cafe";
-			$Cookies="Cookies";
-			$user=$this->session->userdata('admin_user');
-			$a['debit_bca'] = $this->model_admin->tampil_trx_user_today_close_bca_tgl($start,$end)->result();
-			$a['debit_mandiri'] = $this->model_admin->tampil_trx_user_today_close_mandiri_tgl($start,$end)->result();
-			$a['close_debit'] = $this->model_admin->tampil_trx_user_today_close_debit_tgl($start,$end)->result();
-
-			$a['data'] = $this->model_master->tampil_kategorytoday_tgl($start,$end,$bolu)->result();
-			$a['dataDjavamous'] = $this->model_master->tampil_kategoryDjavamos_tgl($start,$end,$Djavamous)->result();
-			$a['dataModernCake'] = $this->model_master->tampil_kategoryModernCake_tgl($start,$end,$ModernCake)->result_object();
-			$a['dataMochi'] = $this->model_master->tampil_kategoryMochi_tgl($start,$end,$Mochi)->result_object();
-			$a['dataSnack'] = $this->model_master->tampil_kategorySnack_tgl($start,$end,$Snack)->result_object();
-			$a['dataCafe'] = $this->model_master->tampil_kategoryCafe_tgl($start,$end,$Cafe)->result_object();
-			$a['dataCookies'] = $this->model_master->tampil_kategoryCookies_tgl($start,$end,$Cookies)->result_object();
-		
-			$a['totalTodayPenBakery']= $this->model_master->tampil_trxtodayBakery_tgl($start,$end)->result();
-
-			$a['page'] = "master/penjualan/print-pendapatan";
-			$a['title'] = "Pendaptan by Kategori Produk";
-			$this->load->view('admin/index',$a);
-
-			}
-			else{
-
-
 		$today=date('Y-m-d');
 		//$today = $this->input->get('haritanggal');
 		$bolu="bolu";
@@ -2066,7 +2022,6 @@ class Admin extends CI_Controller {
 		$a['page'] = "master/penjualan/laporan-penjualan";
 		$a['title'] = "Pendaptan by Kategori Produk";
 		$this->load->view('admin/index',$a);
-		}
 
 
 	}
