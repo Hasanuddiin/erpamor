@@ -88,9 +88,15 @@ class Model_admin extends CI_Model {
 	
 	
 	
-	public function tampil_piutang()
+	public function tampil_piutang($identity)
 	{
-		return $this->db->get('as_receivables');
+		$this->db->select('count(as_receivables.invoiceID)');
+		$this->db->from('as_receivables');
+		$this->db->from('as_sales_transactions');
+		$this->db->where('as_receivables.invoiceID = as_sales_transactions.invoiceID');
+		$this->db->where('as_sales_transactions.identityID',$identity);
+		return $this->db->get();
+
 	}
 	
 	public function tampil_data_pendidikan()

@@ -1119,7 +1119,7 @@ public function hapus_trxbahan($id)
 		return $this->db->get('as_order_transactions');
 	}
 	
-	public function tampil_kpiutang()
+	public function tampil_kpiutang($identity)
 	{
 		$this->db->select('*');
 		$this->db->select('SUM(receivablePay) as totalbayartermin');
@@ -1127,7 +1127,46 @@ public function hapus_trxbahan($id)
     	$this->db->from('as_receivables');
 		$this->db->join('as_receivables_payment', 'as_receivables.receivableID = as_receivables_payment.receivableID', 'left');
     	$this->db->join('as_sales_transactions', 'as_receivables.invoiceID = as_sales_transactions.invoiceID', 'left');
+    	$this->db->where('as_sales_transactions.identityID',$identity);
 		$this->db->group_by('as_receivables.receivableID');
+		return $this->db->get();
+	}
+
+	public function tampil_kpiutang_tgl($start,$end)
+	{
+		$this->db->select('*');
+		$this->db->select('SUM(receivablePay) as totalbayartermin');
+		$this->db->select('as_receivables.receivableID as idpiutang');
+    	$this->db->from('as_receivables');
+		$this->db->join('as_receivables_payment', 'as_receivables.receivableID = as_receivables_payment.receivableID', 'left');
+    	$this->db->join('as_sales_transactions', 'as_receivables.invoiceID = as_sales_transactions.invoiceID', 'left');
+    	$this->db->where('as_sales_transactions.trxDate BETWEEN "'. date('Y-m-d', strtotime($start)). '" and "'. date('Y-m-d', strtotime($end)).'"');
+		$this->db->group_by('as_receivables.receivableID');
+		return $this->db->get();
+	}
+
+	public function tampil_kpiutang_jml()
+	{
+		$this->db->select('*');
+		$this->db->select('SUM(receivablePay) as totalbayartermin');
+		
+    	$this->db->from('as_receivables_payment');
+    	
+
+		
+		return $this->db->get();
+	}
+
+	public function tampil_kpiutang_total()
+	{
+		$this->db->select('*');
+		$this->db->select('SUM(trxTotal) as totalPiutang');
+		$this->db->from('as_sales_transactions');
+		$this->db->from('as_receivables');
+		$this->db->from('as_receivables_payment');
+		$this->db->where('as_receivables.receivableID = as_receivables_payment.receivableID');
+    	$this->db->where('as_receivables.invoiceID = as_sales_transactions.invoiceID');
+    	
 		return $this->db->get();
 	}
 	

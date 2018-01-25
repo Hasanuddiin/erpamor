@@ -77,7 +77,7 @@ class Admin extends CI_Controller {
 		$a['menu_po']	= $this->model_admin->tampil_menu_po($level)->result_object();
 		$a['menu_penerimaan']	= $this->model_admin->tampil_menu_penerimaan($level)->result_object();
 		$a['menu_returbeli']	= $this->model_admin->tampil_menu_returbeli($level)->result_object();
-		$a['piutang']	= $this->model_admin->tampil_piutang()->num_rows();
+		$a['piutang']	= $this->model_admin->tampil_piutang($identity)->num_rows();
 		$a['po']	= $this->model_admin->get_po()->num_rows();
 		$a['order_po']	= $this->model_admin->get_order($today)->num_rows();
 		$a['hutang']	= $this->model_admin->tampil_hutang()->num_rows();
@@ -3618,10 +3618,27 @@ class Admin extends CI_Controller {
 
 									function kpiutang() {
 										$this->cek_aktif();
-										$a['kpiutang']= $this->model_master->tampil_kpiutang()->result();
+										$identity=$this->session->userdata('identityID');
+										if (isset($_POST ['display'])){
+											$date=$_POST['date'];
+											$date=explode('-',$date);
+											$start=date("Y-m-d",strtotime($date[0]));
+											$end=date("Y-m-d",strtotime($date[1]));
+
+											$a['kpiutang']= $this->model_master->tampil_kpiutang_tgl($start,$end)->result();
+											$a['kpiutang_jml']= $this->model_master->tampil_kpiutang_jml($start,$end)->result();
+											$a['page'] = "master/keuangan/kpiutang/kpiutang_tgl";
+											$a['title'] = "Kartu Piutang";
+											$this->load->view('admin/index',$a);
+
+										}else{
+										$a['kpiutang']= $this->model_master->tampil_kpiutang($identity)->result();
+										$a['kpiutang_jml']= $this->model_master->tampil_kpiutang_jml()->result();
+										$a['kpiutang_total']= $this->model_master->tampil_kpiutang_total()->result();
 										$a['page'] = "master/keuangan/kpiutang/kpiutang";
 										$a['title'] = "Kartu Piutang";
 										$this->load->view('admin/index',$a);
+										}
 									}
 									
 									function kpiutang_save_detail() {

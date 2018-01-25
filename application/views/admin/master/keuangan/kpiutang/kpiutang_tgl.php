@@ -34,9 +34,10 @@
                       </div>
                       <button type="submit" class="btn btn-danger btn-flat" name="display">GO</button>
 
-          <a href="<?php echo base_url(); ?>admin/printpendapatan" class="btn btn-success btn-flat"><i class="fa fa-print"></i> Cetak </a>     
+          <a href="<?php echo base_url(); ?>admin/printpendapatan" class="btn btn-success btn-flat"><i class="fa fa-print"></i> Cetak </a> 
+             
+          
         </form>
-         
                   	
                   </h3>
                   <div class="box-tools">
@@ -49,53 +50,6 @@
                     </div>
                     -->
                   </div>
-                  <?php foreach ($kpiutang_jml as $lihat): ?>
-                    <div class="col-md-4">
-                      <div class="box box-warning box-solid">
-                        <div class="box-header with-border">
-                          <h3 class="box-title fa fa-money">&nbsp;&nbsp;Total Sisa Piutang</h3>
-                            <div class="box-tools pull-right">
-                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                            </div><!-- /.box-tools -->
-                        </div><!-- /.box-header -->
-                      <div class="box-body">
-                       <span class="info-box-number"><b>RP. &nbsp;<?php echo number_format($lihat->totalbayartermin); ?></b></span>
-                    </div><!-- /.box-body -->
-                  </div><!-- /.box -->
-                </div><!-- /.col -->
-                <div class="col-md-4">
-                      <div class="box box-success box-solid">
-                        <div class="box-header with-border">
-                          <h3 class="box-title fa fa-money">&nbsp;&nbsp;Total Pembayaran Piutang</h3>
-                            <div class="box-tools pull-right">
-                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                            </div><!-- /.box-tools -->
-                        </div><!-- /.box-header -->
-                      <div class="box-body">
-                       <span class="info-box-number"><b>RP. &nbsp;<?php echo number_format($lihat->totalbayartermin); ?></b></span>
-                    </div><!-- /.box-body -->
-                  </div><!-- /.box -->
-                </div><!-- /.col -->
-                 <?php endforeach; ?>
-                  <?php foreach ($kpiutang_total as $lihat): ?>
-                <div class="col-md-4">
-                      <div class="box box-danger box-solid">
-                        <div class="box-header with-border">
-                          <h3 class="box-title fa fa-money">&nbsp;&nbsp;Jumlah Total Piutang</h3>
-                            <div class="box-tools pull-right">
-                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                            </div><!-- /.box-tools -->
-                        </div><!-- /.box-header -->
-                      <div class="box-body">
-                       <span class="info-box-number"><b>RP. &nbsp;<?php echo number_format($lihat->totalPiutang); ?></b></span>
-                    </div><!-- /.box-body -->
-                  </div><!-- /.box -->
-                </div><!-- /.col -->
-                   
-                  
-                  
-                <?php endforeach; ?>
-
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
                 
