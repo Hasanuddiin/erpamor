@@ -11,20 +11,6 @@ class Model_user extends CI_Model {
 		$this->db->select('m_admin.username as nipp');
 		$this->db->from('as_pegawai');
 		$this->db->join('m_admin', 'as_pegawai.nip = m_admin.username', 'left'); 
-		//$this->db->where('as_pegawai.nip',$id);
-		$this->db->order_by('pegawai_id', 'DESC');
-		return $this->db->get();
-	}
-
-	public function tampil_data_user($id)
-	{
-		
-		
-		$this->db->select('*');
-		$this->db->select('m_admin.username as nipp');
-		$this->db->from('as_pegawai');
-		$this->db->join('m_admin', 'as_pegawai.nip = m_admin.username', 'left'); 
-		$this->db->where('as_pegawai.nip',$id);
 		$this->db->order_by('pegawai_id', 'DESC');
 		return $this->db->get();
 	}

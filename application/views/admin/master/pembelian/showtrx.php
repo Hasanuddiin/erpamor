@@ -146,22 +146,23 @@
 
         			<br/>
         			<center> <h4>Form Isian Tanda tangan</h4> </center>
-        			
-                        
-        			</div><!-- /.box-body -->
-        		</div>
-                <?php  
+        			<table class="table table-bordered table-hover">
+                    <?php  
                             foreach ($detail as $data):
                                 ?>
-                    
-                           
-                                
-                                    <button type="submit" name="submit" class="btn btn-warning" value="trxprint"><i class="fa fa-print"></i> Cetak PO</button>
-                                    <a href="<?php echo base_url(); ?>pembelian/addtpm"  class="btn btn-primary"><i class="fa fa-plus-square"></i> Transaksi Baru</a>
+        			
+        					<tr>
+        						<td colspan="4">
+        							<button type="submit" name="submit" class="btn btn-warning" value="trxprint"><i class="fa fa-print"></i> Cetak PO</button>
+        							<a href="<?php echo base_url(); ?>pembelian/addtpm"  class="btn btn-primary"><i class="fa fa-plus-square"></i> Transaksi Baru</a>
                                
                                     
-                               
+        						</td>
                                 <?php endforeach; ?>
+        					</tr>
+        				</table>
+        			</div><!-- /.box-body -->
+        		</div>
         	</div>
         </div>
         

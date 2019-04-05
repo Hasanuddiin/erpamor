@@ -11,6 +11,7 @@
 	font-size:11px;
 
 }
+
 p {
 
 	line-height:1;
@@ -193,7 +194,7 @@ table.trxapp td, th { padding:5px;text-align:center; }
 
 				<br/><br/>
 
-                  <table border="" class="sum" width="100%">
+                  <table border="1" class="sum" width="100%">
 
                     <thead >
 
@@ -269,7 +270,7 @@ table.trxapp td, th { padding:5px;text-align:center; }
 
 				  <td></td><td></td>
 
-				  <td >Purchasing</td>
+				  <td >Purchasing Manager</td>
 
 				  </tr>
 
@@ -279,7 +280,7 @@ table.trxapp td, th { padding:5px;text-align:center; }
 
 					  <td></td><td></td>
 
-					  <td width=100 height=100>Ade Nurbayan</td>
+					  <td width=100 height=100>Adenurbayan</td>
 
 					 </tr>
 

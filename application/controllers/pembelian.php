@@ -57,39 +57,35 @@ class Pembelian extends CI_Controller
 	public function daftar_po(){
 
 		$this->cek_aktif();
+		
+		if (isset($_POST['display'])){
+			$date=$_POST['date'];
+			$date=explode('-',$date);
+			$start=date("Y-m-d",strtotime($date[0]));
+			$end=date("Y-m-d",strtotime($date[1]));
 
-		$a['list_buy'] = $this->model_master->tampilkan_transaksi_all_order();
-
-		$a['page'] = "master/pembelian/view_list";
-
-		$a['title'] = "Daftar Penerimaan Barang";
-
-		$this->load->view('admin/index',$a);
-
-	}
-
-
-
-	public function daftar_po_bytgl(){
-
-		$this->cek_aktif();
-
-		$tanggal1 = $this->input->post('tgl1');
-
-		//$tanggal1=$row_Recordset1['tgl1']; echo strtotime($tgl) <= strtotime('')?'': date("d-m-Y", strtotime($tgl));
-		//$tanggal1 = date("Y/m/d", strtotime(str_replace('"', '&quot;', $tgl['StatusActiveDate'])));
-
-		$tanggal2 = $this->input->post('tgl2');
-
-		$a['list_buy_tgl'] = $this->model_master->tampilkan_transaksi_all_order_by_tgl($tanggal1,$tanggal2)->result();
-
-		$a['page'] = "master/pembelian/view_list_tgl";
+			$a['mulai'] = $start;
+			$a['akhir'] = $end;
+			$a['list_buy_tgl'] = $this->model_master->tampilkan_transaksi_all_order_by_tgl($start,$end)->result();
+			$a['sum_tgl'] = $this->model_master->tampilkan_transaksi_all_order_by_tgl_sum($start,$end)->result();
+			$a['page'] = "master/pembelian/view_list_tgl";
 
 		$a['title'] = "Daftar Penerimaan Barang";
 
 		$this->load->view('admin/index',$a);
+		}else{
+			
+			$a['list_buy'] = $this->model_master->tampilkan_transaksi_all_order();
+			$a['page'] = "master/pembelian/view_list";
 
+			$a['title'] = "Daftar Penerimaan Barang";
+
+		$this->load->view('admin/index',$a);
+		}
+		
 	}
+
+
 
 
 

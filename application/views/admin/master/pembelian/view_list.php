@@ -1,4 +1,5 @@
 <div class="content-wrapper">
+ 
 
 	<!-- Content Header (Page header) -->
 
@@ -34,33 +35,32 @@
 			<div class="form-group">
 
                                   
-                                        <div class="col-md-2" >
+                                      
+				<div class="box-header">
+				<form method="post">
+					<div class="form-group col-md-6">
+						
+						<div class="input-group">
+						  <div class="input-group-addon">
+							<i class="fa fa-calendar"></i>
+							
+						  </div>
+						<input type="text" name="date" class="form-control pull-right active" id="reservation" required>
 
-											<div class="form-group">
+					</div>
+                <!-- /.input group -->
+					</div>
+					<button type="submit" class="btn btn-danger" name="display">GO</button>
+             
+					
+				</form>
+				
+				</div>
+				
 
-												
-												<input type="text" id="diskondatestart" name="tgl1" class="form-control" value="">
+										
 
-											</div>
-
-										</div>
-
-										<div class="col-md-2" >
-
-											<div class="form-group">
-
-												
-
-												<input type="text" id="diskondatestop" name="tgl2" class="form-control" value="">
-
-											</div>
-
-										</div>
-
-										<a href="<?php echo base_url(); ?>pembelian/daftar_po_bytgl" class="btn btn-sm btn-warning btn-flat"><i class="fa fa-play"></i> Go</a>
-
-										<a id="btnExport" class="btn btn-sm btn-success btn-flat"><i class="fa  fa-file-excel-o"></i> Export to excel</a>
-
+										
                                     </div>
 
 			<div class="box-body">
@@ -150,6 +150,9 @@
 						</tbody>
 
 					</table>
+					
+					
+					
 
 				</div>
 
@@ -176,7 +179,63 @@
 
 
 		<script>
+			$(function () {
+        //Datemask dd/mm/yyyy
+        $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+        //Datemask2 mm/dd/yyyy
+        $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
+        //Money Euro
+        $("[data-mask]").inputmask();
 
+        //Date range picker
+        $('#reservation').daterangepicker();
+        //Date range picker with time picker
+        $('#reservationtime').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
+        //Date range as a button
+        $('#daterange-btn').daterangepicker(
+                {
+                  ranges: {
+                    'Today': [moment(), moment()],
+                    'Yesterday': [moment().subtract('days', 1), moment().subtract('days', 1)],
+                    'Last 7 Days': [moment().subtract('days', 6), moment()],
+                    'Last 30 Days': [moment().subtract('days', 29), moment()],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
+                  },
+                  startDate: moment().subtract('days', 29),
+                  endDate: moment()
+                },
+        function (start, end) {
+          $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        }
+        );
+
+        //iCheck for checkbox and radio inputs
+        $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+          checkboxClass: 'icheckbox_minimal-blue',
+          radioClass: 'iradio_minimal-blue'
+        });
+        //Red color scheme for iCheck
+        $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+          checkboxClass: 'icheckbox_minimal-red',
+          radioClass: 'iradio_minimal-red'
+        });
+        //Flat red color scheme for iCheck
+        $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+          checkboxClass: 'icheckbox_flat-green',
+          radioClass: 'iradio_flat-green'
+        });
+
+        //Colorpicker
+        $(".my-colorpicker1").colorpicker();
+        //color picker with addon
+        $(".my-colorpicker2").colorpicker();
+
+        //Timepicker
+        $(".timepicker").timepicker({
+          showInputs: false
+        });
+      });
 
 
 			$(document).ready(function(){
@@ -215,7 +274,7 @@
 
 
 
-
+					
 
 
 
@@ -276,6 +335,7 @@
     a.click();
 
   });
+
 
 });
 

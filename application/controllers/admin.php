@@ -77,7 +77,7 @@ class Admin extends CI_Controller {
 		$a['menu_po']	= $this->model_admin->tampil_menu_po($level)->result_object();
 		$a['menu_penerimaan']	= $this->model_admin->tampil_menu_penerimaan($level)->result_object();
 		$a['menu_returbeli']	= $this->model_admin->tampil_menu_returbeli($level)->result_object();
-		$a['piutang']	= $this->model_admin->tampil_piutang()->num_rows();
+		$a['piutang']	= $this->model_admin->tampil_piutang($identity)->num_rows();
 		$a['po']	= $this->model_admin->get_po()->num_rows();
 		$a['order_po']	= $this->model_admin->get_order($today)->num_rows();
 		$a['hutang']	= $this->model_admin->tampil_hutang()->num_rows();
@@ -488,8 +488,8 @@ class Admin extends CI_Controller {
 
 		
 		$a['totalTodayPen']= $this->model_master->tampil_trxtoday($today)->result();
-		$a['totalPendToday']= $this->model_master->tampil_trxsumtodayBakery($today,$user)->result();
-		$a['page'] = "master/penjualan/print-pendapatan";
+		$a['totalTodayPenBakery']= $this->model_master->tampil_trxsumtodayBakery($today,$user)->result();
+		$a['page'] = "master/penjualan/print-pendapatan-today";
 		$a['title'] = "Pendaptan by Kategori Produk";
 		$this->load->view('admin/index',$a);
 	}
@@ -1960,6 +1960,44 @@ class Admin extends CI_Controller {
 
 	function showrekappromo() {
 		$this->cek_aktif();
+		if (isset($_POST ['display'])){
+			$date=$_POST['date'];
+			$date=explode('-',$date);
+			$start=date("Y-m-d",strtotime($date[0]));
+			$end=date("Y-m-d",strtotime($date[1]));
+
+			$identity=$this->session->userdata('identityID');
+			$a['perusahaan']= $this->model_perusahaan->tampil_data_identity($identity)->result();
+			$user=$this->session->userdata('admin_user');
+		$a['list_kasir'] = $this->model_master->get_kasir();
+		
+		$a['data'] = $this->model_master->tampil_rekappromo_tgl($start,$end, $user)->result_object();
+		$a['totalpendapatan']= $this->model_master->tampil_trxtoday($start,$end)->result();
+		$a['totalPendToday']= $this->model_master->tampil_trxsumtoday($start,$end, $user)->result();
+		$a['page'] = "master/penjualan/show-rekap-promo-tgl";
+		$a['title'] = "Rekap Tagihan Promo Hari ini";
+		$this->load->view('admin/index',$a);
+			}
+		if (isset($_POST ['print'])){
+			$date=$_POST['date'];
+			$date=explode('-',$date);
+			$start=date("Y-m-d",strtotime($date[0]));
+			$end=date("Y-m-d",strtotime($date[1]));
+			
+			$identity=$this->session->userdata('identityID');
+			$a['perusahaan']= $this->model_perusahaan->tampil_data_identity($identity)->result();
+			$user=$this->session->userdata('admin_user');
+		$a['list_kasir'] = $this->model_master->get_kasir();
+		
+		$a['data'] = $this->model_master->tampil_rekappromo_tgl($start,$end, $user)->result_object();
+		$a['totalpendapatan']= $this->model_master->tampil_trxtoday($start,$end)->result();
+		$a['totalPendToday']= $this->model_master->tampil_trxsumtoday($start,$end, $user)->result();
+		$a['page'] = "master/penjualan/show-rekap-promo-print";
+		$a['title'] = "Rekap Tagihan Promo Hari ini";
+		$this->load->view('admin/index',$a);
+		}else{
+
+
 		$today=date('Y-m-d');
 		$user=$this->session->userdata('admin_user');
 		$a['list_kasir'] = $this->model_master->get_kasir();
@@ -1970,6 +2008,8 @@ class Admin extends CI_Controller {
 		$a['page'] = "master/penjualan/show-rekap-promo";
 		$a['title'] = "Rekap Tagihan Promo Hari ini";
 		$this->load->view('admin/index',$a);
+
+		}
 	}
 
 
@@ -1995,6 +2035,50 @@ class Admin extends CI_Controller {
 
 	function showreporttoday() {
 		$this->cek_aktif();
+		if (isset($_POST['display'])){
+			$date=$_POST['date'];
+			$date=explode('-',$date);
+			$start=date("Y-m-d",strtotime($date[0]));
+			$end=date("Y-m-d",strtotime($date[1]));
+
+			$identity=$this->session->userdata('identityID');
+			$user=$this->session->userdata('admin_user');
+			//$trxDateprint = date('d-m-Y');
+			$a['trxDateprint']= $start;
+			$a['perusahaan']= $this->model_perusahaan->tampil_data_identity($identity)->result();
+
+			$a['dateStart'] = $start;
+			$a['dateEnd'] = $end;
+			$bolu="bolu";
+			$Djavamous="Djavamous";
+			$ModernCake="ModernCake";
+			$Mochi="Mochi";
+			$Snack="Snack";
+			$Cafe="Cafe";
+			$Cookies="Cookies";
+			$user=$this->session->userdata('admin_user');
+			$a['debit_bca'] = $this->model_admin->tampil_trx_user_today_close_bca_tgl($start,$end)->result();
+			$a['debit_mandiri'] = $this->model_admin->tampil_trx_user_today_close_mandiri_tgl($start,$end)->result();
+			$a['close_debit'] = $this->model_admin->tampil_trx_user_today_close_debit_tgl($start,$end)->result();
+
+			$a['data'] = $this->model_master->tampil_kategorytoday_tgl($start,$end,$bolu)->result();
+			$a['dataDjavamous'] = $this->model_master->tampil_kategoryDjavamos_tgl($start,$end,$Djavamous)->result();
+			$a['dataModernCake'] = $this->model_master->tampil_kategoryModernCake_tgl($start,$end,$ModernCake)->result_object();
+			$a['dataMochi'] = $this->model_master->tampil_kategoryMochi_tgl($start,$end,$Mochi)->result_object();
+			$a['dataSnack'] = $this->model_master->tampil_kategorySnack_tgl($start,$end,$Snack)->result_object();
+			$a['dataCafe'] = $this->model_master->tampil_kategoryCafe_tgl($start,$end,$Cafe)->result_object();
+			$a['dataCookies'] = $this->model_master->tampil_kategoryCookies_tgl($start,$end,$Cookies)->result_object();
+		
+			$a['totalTodayPenBakery']= $this->model_master->tampil_trxtodayBakery_tgl($start,$end)->result();
+
+			$a['page'] = "master/penjualan/print-pendapatan";
+			$a['title'] = "Pendaptan by Kategori Produk";
+			$this->load->view('admin/index',$a);
+
+			}
+			else{
+
+
 		$today=date('Y-m-d');
 		//$today = $this->input->get('haritanggal');
 		$bolu="bolu";
@@ -2022,6 +2106,7 @@ class Admin extends CI_Controller {
 		$a['page'] = "master/penjualan/laporan-penjualan";
 		$a['title'] = "Pendaptan by Kategori Produk";
 		$this->load->view('admin/index',$a);
+		}
 
 
 	}
@@ -3573,10 +3658,27 @@ class Admin extends CI_Controller {
 
 									function kpiutang() {
 										$this->cek_aktif();
-										$a['kpiutang']= $this->model_master->tampil_kpiutang()->result();
+										$identity=$this->session->userdata('identityID');
+										if (isset($_POST ['display'])){
+											$date=$_POST['date'];
+											$date=explode('-',$date);
+											$start=date("Y-m-d",strtotime($date[0]));
+											$end=date("Y-m-d",strtotime($date[1]));
+
+											$a['kpiutang']= $this->model_master->tampil_kpiutang_tgl($start,$end)->result();
+											$a['kpiutang_jml']= $this->model_master->tampil_kpiutang_jml($start,$end)->result();
+											$a['page'] = "master/keuangan/kpiutang/kpiutang_tgl";
+											$a['title'] = "Kartu Piutang";
+											$this->load->view('admin/index',$a);
+
+										}else{
+										$a['kpiutang']= $this->model_master->tampil_kpiutang($identity)->result();
+										$a['kpiutang_jml']= $this->model_master->tampil_kpiutang_jml()->result();
+										$a['kpiutang_total']= $this->model_master->tampil_kpiutang_total()->result();
 										$a['page'] = "master/keuangan/kpiutang/kpiutang";
 										$a['title'] = "Kartu Piutang";
 										$this->load->view('admin/index',$a);
+										}
 									}
 									
 									function kpiutang_save_detail() {

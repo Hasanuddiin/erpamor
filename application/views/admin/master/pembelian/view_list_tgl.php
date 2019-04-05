@@ -30,8 +30,11 @@
 
 		<div class="box box-info">
 
-			<div class="box-header with-border"> Daftar Pembelian Barang</div>
-
+			<div class="box-header with-border"> Daftar Pembelian Barang <br>
+			<b>Dari tanggal : <?php echo date("d-m-Y", strtotime($mulai));?></b><br>
+			<b>Sampai &nbsp; : <?php echo date("d-m-Y", strtotime ($akhir));?></b>
+</div>
+			
 			<div class="box-body">
 
 
@@ -52,7 +55,8 @@
 
 							<th>Tanggal PO</th>
 
-							<th>aksi</th>
+							<th>Status</th>
+							<th>Jatuh Tempo</th>
 
 
 
@@ -79,11 +83,20 @@
 							
 								<td>
 
-									<button class="btnShow1 btn btn-info btn-sm" id="btnShow1" ><i class="fa fa-search"></i> Detail</button>
-
-									<a href="<?php echo base_url(); ?>pembelian/hapus_po/<?php echo $data->invoiceOrderID ?>" onclick="javascript: return confirm('Anda yakin akan menghapus data ini ?')" class="btn btn-sm btn-danger btn-flat"><i class="fa fa-trash"></i> Hapus</a>
+									<?php $today=date('Y-m-d') ?>
+              						<?php
+              						if($data->trxTerminDate >= $today)
+              						{
+                						echo "Belum Lunas";
+              						}
+              						else
+              						{
+                						echo "Lunas";
+              						}
+              						?>
 
 								</td>
+								<td align="center"><?= date("d-m-Y", strtotime($data->trxTerminDate)) ?></td>
 
 								<?php endforeach; ?>
 								
@@ -95,7 +108,20 @@
 						</tbody>
 
 					</table>
+					<table align="center">
+						<th><h3>Jumlah &nbsp;&nbsp; :&nbsp;Rp.&nbsp;</h3></th>
+						<th></th>
+						<th></th>
+						<?php foreach ($sum_tgl as $tgltrx): 
+					?>
+						<td></td>
+						<td></td>
+						<td><h3><b><?php echo number_format($tgltrx->jumlah);?></b></h3></td>
+					<?php endforeach ?>
 
+					</table>
+
+					
 				</div>
 
 				

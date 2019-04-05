@@ -22,7 +22,6 @@
                 <a href="<?php echo base_url(); ?>admin/showreporttoday" class="btn btn-sm btn-warning btn-flat"><i class="fa fa-search"></i> &nbsp;Lihat Kategory Produk</a>  
                 <a href="<?php echo base_url(); ?>admin/showrekaptoday" class="btn btn-sm btn-danger btn-flat"><i class="fa fa-search"></i> &nbsp;Lihat Rekap Penjualan</a>  
                   <a id="btnExport" class="btn btn-sm btn-success btn-flat"><i class="fa  fa-file-excel-o"></i> Export to excel</a> 
-                  <a href="<?php echo base_url(); ?>admin/showrekaptodaytoko"><i class="fa  fa-file-excel-o"></i>Rekap Penjualan Toko</a>
                     
                   <div class="form-group">
                       <input type="hidden" name="nofak" value="">

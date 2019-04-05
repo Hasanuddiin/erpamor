@@ -20,8 +20,24 @@
           		<div class="box">
                 <div class="box-header">
                   <h3 class="box-title">
-                  	<a href="<?php echo base_url(); ?>admin/addso" class="btn btn-sm btn-primary btn-flat"><i class="fa fa-edit"></i> Cari</a>
-					<a href="<?php echo base_url(); ?>admin/tambah_jenis" class="btn btn-sm btn-warning btn-flat"><i class="fa fa-print"></i> Cetak</a>
+                  <form method="post">
+                      <div class="form-group col-md-6">            
+                        <div class="input-group">
+                          <div class="input-group-addon">
+                              <i class="fa fa-calendar"></i>
+              
+                          </div>
+                            <input type="text" name="date" placeholder="Klik disini ..." class="form-control pull-right active" id="reservation" required>
+
+                        </div>
+                <!-- /.input group -->
+                      </div>
+                      <button type="submit" class="btn btn-danger btn-flat" name="display">GO</button>
+
+          <a href="<?php echo base_url(); ?>admin/printpendapatan" class="btn btn-success btn-flat"><i class="fa fa-print"></i> Cetak </a>     
+        </form>
+         
+                  	
                   </h3>
                   <div class="box-tools">
                   	<!--
@@ -33,6 +49,53 @@
                     </div>
                     -->
                   </div>
+                  <?php foreach ($kpiutang_jml as $lihat): ?>
+                    <div class="col-md-4">
+                      <div class="box box-warning box-solid">
+                        <div class="box-header with-border">
+                          <h3 class="box-title fa fa-money">&nbsp;&nbsp;Total Sisa Piutang</h3>
+                            <div class="box-tools pull-right">
+                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                            </div><!-- /.box-tools -->
+                        </div><!-- /.box-header -->
+                      <div class="box-body">
+                       <span class="info-box-number"><b>RP. &nbsp;<?php echo number_format($lihat->totalbayartermin); ?></b></span>
+                    </div><!-- /.box-body -->
+                  </div><!-- /.box -->
+                </div><!-- /.col -->
+                <div class="col-md-4">
+                      <div class="box box-success box-solid">
+                        <div class="box-header with-border">
+                          <h3 class="box-title fa fa-money">&nbsp;&nbsp;Total Pembayaran Piutang</h3>
+                            <div class="box-tools pull-right">
+                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                            </div><!-- /.box-tools -->
+                        </div><!-- /.box-header -->
+                      <div class="box-body">
+                       <span class="info-box-number"><b>RP. &nbsp;<?php echo number_format($lihat->totalbayartermin); ?></b></span>
+                    </div><!-- /.box-body -->
+                  </div><!-- /.box -->
+                </div><!-- /.col -->
+                 <?php endforeach; ?>
+                  <?php foreach ($kpiutang_total as $lihat): ?>
+                <div class="col-md-4">
+                      <div class="box box-danger box-solid">
+                        <div class="box-header with-border">
+                          <h3 class="box-title fa fa-money">&nbsp;&nbsp;Jumlah Total Piutang</h3>
+                            <div class="box-tools pull-right">
+                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                            </div><!-- /.box-tools -->
+                        </div><!-- /.box-header -->
+                      <div class="box-body">
+                       <span class="info-box-number"><b>RP. &nbsp;<?php echo number_format($lihat->totalPiutang); ?></b></span>
+                    </div><!-- /.box-body -->
+                  </div><!-- /.box -->
+                </div><!-- /.col -->
+                   
+                  
+                  
+                <?php endforeach; ?>
+
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
                 
@@ -147,7 +210,39 @@
 
 	  
 	
-<script>
+<script type="text/javascript">
+
+          $(function () {
+        //Datemask dd/mm/yyyy
+        $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+        //Datemask2 mm/dd/yyyy
+        $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
+        //Money Euro
+        $("[data-mask]").inputmask();
+
+        //Date range picker
+        $('#reservation').daterangepicker();
+        //Date range picker with time picker
+        $('#reservationtime').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
+        //Date range as a button
+        $('#daterange-btn').daterangepicker(
+                {
+                  ranges: {
+                    'Today': [moment(), moment()],
+                    'Yesterday': [moment().subtract('days', 1), moment().subtract('days', 1)],
+                    'Last 7 Days': [moment().subtract('days', 6), moment()],
+                    'Last 30 Days': [moment().subtract('days', 29), moment()],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
+                  },
+                  startDate: moment().subtract('days', 29),
+                  endDate: moment()
+                },
+        function (start, end) {
+          $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        });
+      });
+
 $( "#dialog:ui-dialog" ).dialog( "remove" );
    // $(".btnShow").live("click",function(){
     $('body').on('click', '.btnbayar', function(){
@@ -176,4 +271,4 @@ $( "#dialog:ui-dialog" ).dialog( "remove" );
       });
     });
 
-    </script>			
+</script>
